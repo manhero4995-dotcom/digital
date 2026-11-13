@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DSP Lectures — Simple Summary Report</title>
+<style>
+@page {
+  size: A4;
+  margin: 18mm 15mm 18mm 15mm;
+}
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: "DejaVu Sans", "Noto Sans", sans-serif;
+  font-size: 10.2pt;
+  line-height: 1.55;
+  color: #1b2430;
+  margin: 0;
+}
+h1 {
+  font-size: 24pt;
+  line-height: 1.2;
+  color: #0b3d5c;
+  margin: 0 0 6px 0;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #1f7a8c;
+}
+h2 {
+  font-size: 15.5pt;
+  color: #0b3d5c;
+  margin: 22px 0 8px 0;
+  padding: 6px 0 6px 10px;
+  border-left: 5px solid #1f7a8c;
+  background: #eef7f8;
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12.2pt;
+  color: #14506b;
+  margin: 15px 0 5px 0;
+  page-break-after: avoid;
+}
+h4 {
+  font-size: 10.8pt;
+  color: #1f5f73;
+  margin: 12px 0 4px 0;
+  page-break-after: avoid;
+}
+p { margin: 6px 0; }
+strong { color: #0e3a4f; }
+ul, ol { margin: 6px 0 8px 0; padding-left: 22px; }
+li { margin: 3px 0; }
+code {
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 0.9em;
+  background: #f1f5f7;
+  color: #123;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+pre {
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 8.7pt;
+  line-height: 1.45;
+  background: #f6f9fa;
+  border-left: 4px solid #7fb8c4;
+  padding: 8px 11px;
+  margin: 8px 0;
+  white-space: pre-wrap;
+  page-break-inside: avoid;
+}
+pre code { background: transparent; padding: 0; font-size: inherit; }
+blockquote {
+  margin: 10px 0;
+  padding: 8px 12px;
+  background: #fff8e6;
+  border-left: 4px solid #e0a800;
+  color: #4a3b00;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 9px 0 12px 0;
+  font-size: 8.6pt;
+  page-break-inside: avoid;
+}
+th {
+  background: #1f7a8c;
+  color: white;
+  text-align: left;
+  padding: 6px 7px;
+  border: 1px solid #1a6675;
+}
+td {
+  padding: 5px 7px;
+  border: 1px solid #c9d8dd;
+  vertical-align: top;
+}
+tr:nth-child(even) td { background: #f7fbfc; }
+hr {
+  border: none;
+  border-top: 1px solid #c9d8dd;
+  margin: 18px 0;
+}
+a { color: #1f6f8b; text-decoration: none; }
+#TOC, .toc {
+  background: #f7fbfc;
+  border: 1px solid #c9d8dd;
+  padding: 10px 16px 10px 10px;
+  margin: 12px 0 18px 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+#TOC ul, .toc ul { margin: 3px 0; padding-left: 20px; }
+#TOC li, .toc li { margin: 2px 0; }
+#TOC > ul, .toc > ul { padding-left: 12px; }
+.small { font-size: 9pt; color: #555; }
+.cover-box {
+  margin: 18px 0 0 0;
+  padding: 14px 18px;
+  background: #f2f8fa;
+  border: 1px solid #b9d3da;
+  border-radius: 6px;
+  page-break-inside: avoid;
+}
+.cover-title {
+  margin: 0 0 8px 0;
+  font-size: 12.5pt;
+  font-weight: bold;
+  color: #0b3d5c;
+  letter-spacing: 0.2px;
+}
+.cover-box ul { margin: 0 0 8px 0; padding-left: 20px; }
+.cover-box li { margin: 5px 0; }
+.cover-rule {
+  margin: 10px 0 0 0;
+  padding: 7px 10px;
+  background: #fff4d6;
+  border-left: 4px solid #d99b00;
+  color: #4a3b00;
+}
+.page-break { page-break-after: always; }
+</style>
+</head>
+<body>
+<h1 id="digital-signal-processing-simple-summary-report">Digital Signal Processing — Simple Summary Report</h1>
+<p><strong>Coverage:</strong> Lectures 1, 3, 4, 5, 6, and 6-1<br />
+<strong>Lecturer:</strong> Dr. Rehab Mahmoud<br />
+<strong>Report date:</strong> 13 November 2026</p>
+<blockquote>
+<p><strong>How to read this report:</strong> Each part starts with a <strong>simple idea</strong>, then gives the <strong>key formulas</strong>, and ends with an <strong>exam tip</strong>. Lectures 4 and 5 repeat and extend the Z-transform material from Lecture 3, so they are summarized together.</p>
+</blockquote>
+<div class="cover-box">
+<p class="cover-title">Report at a glance</p>
+<ul>
+<li><strong>Lecture 1 — Signals:</strong> continuous vs discrete signals, impulse, step, exponentials, and Fourier series.</li>
+<li><strong>Lectures 3–5 — Z-transform:</strong> definition, ROC, poles and zeros, stability, standard pairs, and worked examples.</li>
+<li><strong>Lecture 6 — Inverse Z-transform:</strong> inspection, partial fractions, and power series expansion.</li>
+<li><strong>Lecture 6-1 — Properties:</strong> time shift, exponential multiplication, differentiation, time reversal, convolution, and the initial-value theorem.</li>
+</ul>
+<p class="cover-rule"><strong>Golden rule:</strong> a Z-transform is incomplete without its ROC.</p>
+</div>
+
+<div class="page-break"></div>
+
+<div class="toc"><span class="toctitle">Contents</span><ul>
+<li><a href="#1-the-big-picture">1. The Big Picture</a></li>
+<li><a href="#2-lecture-1-signals-and-fourier-series">2. Lecture 1 — Signals and Fourier Series</a><ul>
+<li><a href="#21-continuous-time-vs-discrete-time-signals">2.1 Continuous-time vs discrete-time signals</a></li>
+<li><a href="#22-basic-discrete-time-signals">2.2 Basic discrete-time signals</a></li>
+<li><a href="#23-transformations-of-the-independent-variable">2.3 Transformations of the independent variable</a></li>
+<li><a href="#24-fourier-series-of-periodic-signals">2.4 Fourier series of periodic signals</a></li>
+</ul>
+</li>
+<li><a href="#3-lectures-35-the-z-transform">3. Lectures 3–5 — The Z-Transform</a><ul>
+<li><a href="#31-definition">3.1 Definition</a></li>
+<li><a href="#32-why-the-z-transform-is-useful">3.2 Why the Z-transform is useful</a></li>
+<li><a href="#33-region-of-convergence-roc">3.3 Region of Convergence (ROC)</a></li>
+<li><a href="#34-poles-and-zeros">3.4 Poles and zeros</a></li>
+<li><a href="#35-stability-and-causality">3.5 Stability and causality</a></li>
+<li><a href="#36-common-z-transform-pairs">3.6 Common Z-transform pairs</a></li>
+<li><a href="#37-worked-examples">3.7 Worked examples</a></li>
+</ul>
+</li>
+<li><a href="#4-lecture-6-inverse-z-transform">4. Lecture 6 — Inverse Z-Transform</a><ul>
+<li><a href="#41-inspection-method">4.1 Inspection method</a></li>
+<li><a href="#42-partial-fraction-expansion">4.2 Partial fraction expansion</a></li>
+<li><a href="#43-power-series-expansion">4.3 Power series expansion</a></li>
+<li><a href="#44-which-inverse-method-should-i-use">4.4 Which inverse method should I use?</a></li>
+</ul>
+</li>
+<li><a href="#5-lecture-6-1-z-transform-properties">5. Lecture 6-1 — Z-Transform Properties</a><ul>
+<li><a href="#51-the-eight-properties">5.1 The eight properties</a></li>
+<li><a href="#52-property-examples">5.2 Property examples</a></li>
+</ul>
+</li>
+<li><a href="#6-formula-sheet">6. Formula Sheet</a><ul>
+<li><a href="#signals">Signals</a></li>
+<li><a href="#fourier-series">Fourier series</a></li>
+<li><a href="#z-transform">Z-transform</a></li>
+<li><a href="#key-pairs">Key pairs</a></li>
+<li><a href="#roc-rules">ROC rules</a></li>
+<li><a href="#stability-and-causality">Stability and causality</a></li>
+<li><a href="#inverse-z-transform">Inverse Z-transform</a></li>
+<li><a href="#properties">Properties</a></li>
+</ul>
+</li>
+<li><a href="#7-common-mistakes-to-avoid">7. Common Mistakes to Avoid</a></li>
+<li><a href="#8-one-minute-recap">8. One-Minute Recap</a></li>
+</ul>
+</div>
+<hr />
+<h2 id="1-the-big-picture">1. The Big Picture</h2>
+<p>Digital Signal Processing (DSP) is the study of signals that exist at discrete instants of time, and the systems that process them.</p>
+<p>The course moves in this order:</p>
+<ol>
+<li><strong>Signals</strong> — continuous and discrete signals, basic signals, Fourier series.</li>
+<li><strong>Z-transform</strong> — a tool that turns a discrete-time sequence into a function of a complex variable <code>z</code>.</li>
+<li><strong>Inverse Z-transform</strong> — going back from <code>X(z)</code> to <code>x[n]</code>.</li>
+<li><strong>LTI systems and stability</strong> — using poles and the ROC to judge system behaviour.</li>
+<li><strong>Filter design (FIR/IIR)</strong> and the <strong>DFT</strong> — later topics.</li>
+</ol>
+<p>The Z-transform is the centre of Lectures 3–6. Think of it as the discrete-time cousin of the Laplace transform.</p>
+<hr />
+<h2 id="2-lecture-1-signals-and-fourier-series">2. Lecture 1 — Signals and Fourier Series</h2>
+<h3 id="21-continuous-time-vs-discrete-time-signals">2.1 Continuous-time vs discrete-time signals</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Continuous-time (C.T.)</th>
+<th>Discrete-time (D.T.)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Defined</td>
+<td>At every instant of time</td>
+<td>Only at discrete instants</td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td><code>t</code></td>
+<td><code>n</code></td>
+</tr>
+<tr>
+<td>Notation</td>
+<td><code>x(t)</code> — parentheses</td>
+<td><code>x[n]</code> — square brackets</td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>Video, audio (naturally continuous)</td>
+<td>Stock market, temperature samples</td>
+</tr>
+</tbody>
+</table>
+<p>Most real signals are continuous, but computers and digital signal processors need discrete values. So continuous signals are <strong>sampled</strong> to become discrete.</p>
+<p><strong>Simple idea:</strong> continuous time is a smooth film; discrete time is a sequence of photographs.</p>
+<h3 id="22-basic-discrete-time-signals">2.2 Basic discrete-time signals</h3>
+<p><strong>Unit impulse</strong></p>
+<pre><code>δ[n] = 1,  n = 0
+       0,  n ≠ 0
+</code></pre>
+<p>It is one single dot at the origin. It is the simplest building block of discrete signals.</p>
+<p><strong>Unit step</strong></p>
+<pre><code>u[n] = 1,  n ≥ 0
+       0,  n &lt; 0
+</code></pre>
+<p>It "switches on" at <code>n = 0</code> and stays on forever.</p>
+<p><strong>Complex exponential / sinusoid</strong></p>
+<pre><code>x[n] = C αⁿ
+</code></pre>
+<ul>
+<li>If <code>α</code> is real, the sequence grows or decays.</li>
+<li>If <code>α</code> is complex, the real and imaginary parts are sinusoids.</li>
+<li>If <code>|α| = 1</code>, the sequence is a pure sinusoid.</li>
+<li>If <code>|α| &lt; 1</code>, it is a decaying sinusoid.</li>
+<li>If <code>|α| &gt; 1</code>, it is a growing sinusoid.</li>
+</ul>
+<p>Euler's relation links exponentials and sinusoids:</p>
+<pre><code>e^(jω₀t) = cos(ω₀t) + j sin(ω₀t)
+
+cos(ω₀t) = (e^(jω₀t) + e^(−jω₀t)) / 2
+sin(ω₀t) = (e^(jω₀t) − e^(−jω₀t)) / (2j)
+</code></pre>
+<p><strong>Simple idea:</strong> a sinusoid is just two complex exponentials spinning in opposite directions.</p>
+<h3 id="23-transformations-of-the-independent-variable">2.3 Transformations of the independent variable</h3>
+<ol>
+<li>
+<p><strong>Time shifting</strong>
+   - <code>x[n − n₀]</code> → shifted <strong>right</strong> (delayed).
+   - <code>x[n + n₀]</code> → shifted <strong>left</strong> (advanced).</p>
+</li>
+<li>
+<p><strong>Time reversal</strong>
+   - <code>x[−n]</code> → mirror image about <code>n = 0</code>.</p>
+</li>
+<li>
+<p><strong>Time scaling</strong>
+   - <code>x[2n]</code> → plays twice as fast (in discrete time this is downsampling).
+   - <code>x[n/2]</code> → plays half as fast (upsampling/interpolation).</p>
+</li>
+</ol>
+<p><strong>Example from the lecture:</strong> for <code>x[n] = u[n]</code>, the signals <code>x[n−1]</code>, <code>x[n+1]</code>, and <code>x[n+3]</code> are the same step, just delayed or advanced.</p>
+<p><strong>Exam tip:</strong> for <code>x[n − n₀]</code>, the graph moves in the <strong>positive</strong> direction when <code>n₀</code> is positive. Do not reverse this.</p>
+<h3 id="24-fourier-series-of-periodic-signals">2.4 Fourier series of periodic signals</h3>
+<p><strong>Continuous time</strong></p>
+<pre><code>x(t) = Σ_{k=−∞}^{∞} a_k e^(jkω₀t)
+
+a_k = (1/T) ∫_T x(t) e^(−jkω₀t) dt
+</code></pre>
+<p><strong>Discrete time</strong></p>
+<pre><code>x[n] = Σ_{k=&lt;N&gt;} a_k e^(jk(2π/N)n)
+
+a_k = (1/N) Σ_{n=&lt;N&gt;} x[n] e^(−jk(2π/N)n)
+</code></pre>
+<p>The notation <code>k = &lt;N&gt;</code> means the sum is over one period of <code>N</code> terms.</p>
+<p><strong>Worked example 1:</strong> <code>x(t) = sin(ω₀t)</code></p>
+<p>Using Euler:</p>
+<pre><code>sin(ω₀t) = (1/2j)e^(jω₀t) − (1/2j)e^(−jω₀t)
+</code></pre>
+<p>So:</p>
+<pre><code>a₁ = 1/(2j),   a₋₁ = −1/(2j),   all other a_k = 0
+</code></pre>
+<p><strong>Worked example 2:</strong></p>
+<pre><code>x(t) = 1 + sin(ω₀t) + 2cos(ω₀t) + cos(2ω₀t + π/4)
+</code></pre>
+<p>The coefficients are:</p>
+<pre><code>a₀ = 1
+a₁ = 1 + 1/(2j) = 1 − 0.5j
+a₋₁ = 1 − 1/(2j) = 1 + 0.5j
+a₂ = (1/2)e^(jπ/4) = (√2/4)(1 + j)
+a₋₂ = (1/2)e^(−jπ/4) = (√2/4)(1 − j)
+</code></pre>
+<p><strong>Simple idea:</strong> Fourier series answers the question "how much of each sinusoid is inside this periodic signal?"</p>
+<hr />
+<h2 id="3-lectures-35-the-z-transform">3. Lectures 3–5 — The Z-Transform</h2>
+<h3 id="31-definition">3.1 Definition</h3>
+<p>The <strong>bilateral (two-sided) Z-transform</strong> of a sequence <code>x[n]</code> is:</p>
+<pre><code>X(z) = Σ_{n=−∞}^{∞} x[n] z^(−n)
+</code></pre>
+<p>For causal signals that are zero for <code>n &lt; 0</code>, the one-sided version is often used:</p>
+<pre><code>X(z) = Σ_{n=0}^{∞} x[n] z^(−n)
+</code></pre>
+<p>Here <code>z</code> is a complex variable:</p>
+<pre><code>z = r e^(jω)
+</code></pre>
+<p>Substituting:</p>
+<pre><code>X(re^(jω)) = Σ x[n] (re^(jω))^(−n)
+           = Σ (x[n] r^(−n)) e^(−jωn)
+</code></pre>
+<p>So the Z-transform is the <strong>DTFT of the sequence after multiplying it by <code>r^(−n)</code></strong>.</p>
+<ul>
+<li>If <code>r = 1</code>, then <code>z = e^(jω)</code> and the Z-transform becomes the <strong>DTFT</strong>.</li>
+<li>The circle <code>|z| = 1</code> is called the <strong>unit circle</strong>.</li>
+</ul>
+<p><strong>Simple idea:</strong> the Z-transform is a frequency lens with an extra "growth/decay" knob <code>r</code>. The unit circle is the special setting where it behaves like the Fourier transform.</p>
+<h3 id="32-why-the-z-transform-is-useful">3.2 Why the Z-transform is useful</h3>
+<ul>
+<li>It solves <strong>difference equations</strong>.</li>
+<li>It evaluates the response of <strong>LTI systems</strong>.</li>
+<li>It helps design and implement <strong>digital filters</strong>.</li>
+<li>It handles signals for which the DTFT does not converge, such as <code>u[n]</code>.</li>
+<li>It generalizes the DTFT and is often more convenient in analytical work.</li>
+</ul>
+<p><strong>Advantage over the DTFT:</strong> the DTFT needs absolute summability, <code>Σ |x[n]| &lt; ∞</code>. Many useful signals fail this test. The Z-transform can still handle them because the factor <code>r^(−n)</code> can make the sum converge.</p>
+<h3 id="33-region-of-convergence-roc">3.3 Region of Convergence (ROC)</h3>
+<p>The <strong>ROC</strong> is the set of all values of <code>z</code> for which the Z-transform sum converges.</p>
+<p><strong>Simple idea:</strong> the ROC is the "valid region" of the transform. Outside it, the infinite sum blows up, so the formula is not valid there.</p>
+<p>Important facts:</p>
+<ul>
+<li>The ROC <strong>cannot contain any poles</strong>.</li>
+<li>The ROC must be a <strong>connected region</strong>.</li>
+<li>For a right-sided sequence, the ROC is <strong>outside</strong> the outermost pole.</li>
+<li>For a left-sided sequence, the ROC is <strong>inside</strong> the innermost pole.</li>
+<li>For a two-sided sequence, the ROC is usually an <strong>annulus</strong> (a ring) between two poles.</li>
+<li>For a finite-length sequence, the ROC is the <strong>whole z-plane</strong>, except possibly <code>z = 0</code> or <code>z = ∞</code>.</li>
+</ul>
+<p>The Fourier transform exists (and the system has a frequency response) <strong>if and only if the ROC includes the unit circle</strong>.</p>
+<p><strong>Geometric series used everywhere:</strong></p>
+<pre><code>Σ_{n=0}^{∞} aⁿ = 1 / (1 − a),   |a| &lt; 1
+</code></pre>
+<p>For the Z-transform, the same idea gives the condition <code>|a z^(−1)| &lt; 1</code>, or <code>|z| &gt; |a|</code>.</p>
+<h3 id="34-poles-and-zeros">3.4 Poles and zeros</h3>
+<p>For a rational Z-transform:</p>
+<pre><code>X(z) = P(z) / Q(z)
+</code></pre>
+<ul>
+<li><strong>Zeros</strong> are the values of <code>z</code> where <code>X(z) = 0</code> (roots of the numerator).</li>
+<li><strong>Poles</strong> are the values of <code>z</code> where <code>X(z) = ∞</code> (roots of the denominator).</li>
+</ul>
+<p>On the pole-zero plot:</p>
+<ul>
+<li>a zero is drawn as <code>○</code></li>
+<li>a pole is drawn as <code>×</code></li>
+</ul>
+<p><strong>Exam tip:</strong> the ROC is always separated by poles. It never jumps over a pole.</p>
+<h3 id="35-stability-and-causality">3.5 Stability and causality</h3>
+<p>For an LTI system with impulse response <code>h[n]</code> and transfer function <code>H(z)</code>:</p>
+<ul>
+<li>The system is <strong>stable</strong> if the ROC of <code>H(z)</code> includes the <strong>unit circle</strong>.</li>
+<li>A <strong>causal</strong> system has a right-sided impulse response, so its ROC extends <strong>outward</strong> from the outermost pole.</li>
+<li>A causal system is <strong>stable</strong> if and only if <strong>all its poles lie inside the unit circle</strong>.</li>
+</ul>
+<p>Why? If all poles are inside the unit circle, the ROC is <code>|z| &gt; r_max</code> with <code>r_max &lt; 1</code>, so the ROC includes <code>|z| = 1</code>.</p>
+<p><strong>Lecture example:</strong> suppose the poles are at <code>z = 1/2</code> and <code>z = 2</code>.</p>
+<ul>
+<li>The ROC <code>1/2 &lt; |z| &lt; 2</code> includes the unit circle → the system is <strong>stable</strong>, but it is <strong>not causal</strong> (two-sided).</li>
+<li>The ROC <code>|z| &gt; 2</code> is causal, but it does <strong>not</strong> include the unit circle → the system is <strong>unstable</strong>.</li>
+<li>Therefore, this system cannot be both causal and stable.</li>
+</ul>
+<h3 id="36-common-z-transform-pairs">3.6 Common Z-transform pairs</h3>
+<table>
+<thead>
+<tr>
+<th>Sequence <code>x[n]</code></th>
+<th>Transform <code>X(z)</code></th>
+<th>ROC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>δ[n]</code></td>
+<td><code>1</code></td>
+<td>all <code>z</code></td>
+</tr>
+<tr>
+<td><code>u[n]</code></td>
+<td><code>1 / (1 − z⁻¹)</code></td>
+<td><code>abs(z) &gt; 1</code></td>
+</tr>
+<tr>
+<td><code>−u[−n−1]</code></td>
+<td><code>1 / (1 − z⁻¹)</code></td>
+<td><code>abs(z) &lt; 1</code></td>
+</tr>
+<tr>
+<td><code>δ[n−m]</code></td>
+<td><code>z⁻ᵐ</code></td>
+<td>all <code>z</code> except 0 or ∞</td>
+</tr>
+<tr>
+<td><code>aⁿu[n]</code></td>
+<td><code>1 / (1 − a z⁻¹)</code></td>
+<td><code>abs(z) &gt; abs(a)</code></td>
+</tr>
+<tr>
+<td><code>−aⁿu[−n−1]</code></td>
+<td><code>1 / (1 − a z⁻¹)</code></td>
+<td><code>abs(z) &lt; abs(a)</code></td>
+</tr>
+<tr>
+<td><code>n aⁿu[n]</code></td>
+<td><code>a z⁻¹ / (1 − a z⁻¹)²</code></td>
+<td><code>abs(z) &gt; abs(a)</code></td>
+</tr>
+<tr>
+<td><code>−n aⁿu[−n−1]</code></td>
+<td><code>a z⁻¹ / (1 − a z⁻¹)²</code></td>
+<td><code>abs(z) &lt; abs(a)</code></td>
+</tr>
+<tr>
+<td><code>cos(ω₀n)u[n]</code></td>
+<td><code>(1 − cosω₀ z⁻¹) / (1 − 2cosω₀ z⁻¹ + z⁻²)</code></td>
+<td><code>abs(z) &gt; 1</code></td>
+</tr>
+<tr>
+<td><code>sin(ω₀n)u[n]</code></td>
+<td><code>sinω₀ z⁻¹ / (1 − 2cosω₀ z⁻¹ + z⁻²)</code></td>
+<td><code>abs(z) &gt; 1</code></td>
+</tr>
+<tr>
+<td><code>rⁿcos(ω₀n)u[n]</code></td>
+<td><code>(1 − r cosω₀ z⁻¹) / (1 − 2r cosω₀ z⁻¹ + r²z⁻²)</code></td>
+<td><code>abs(z) &gt; r</code></td>
+</tr>
+<tr>
+<td><code>rⁿsin(ω₀n)u[n]</code></td>
+<td><code>r sinω₀ z⁻¹ / (1 − 2r cosω₀ z⁻¹ + r²z⁻²)</code></td>
+<td><code>abs(z) &gt; r</code></td>
+</tr>
+<tr>
+<td><code>aⁿ, 0 ≤ n ≤ N−1</code></td>
+<td><code>(1 − aᴺz⁻ᴺ) / (1 − a z⁻¹)</code></td>
+<td><code>abs(z) &gt; 0</code></td>
+</tr>
+</tbody>
+</table>
+<p>In the table, <code>abs(z)</code> means <code>|z|</code>.</p>
+<h3 id="37-worked-examples">3.7 Worked examples</h3>
+<h4 id="example-a-right-sided-exponential">Example A — Right-sided exponential</h4>
+<p>Find the Z-transform of:</p>
+<pre><code>x[n] = aⁿu[n]
+</code></pre>
+<p>Using the definition:</p>
+<pre><code>X(z) = Σ_{n=0}^{∞} aⁿ z^(−n)
+     = Σ_{n=0}^{∞} (a z⁻¹)ⁿ
+     = 1 / (1 − a z⁻¹),   |a z⁻¹| &lt; 1
+</code></pre>
+<p>So:</p>
+<pre><code>x[n] = aⁿu[n]  ↔  X(z) = 1 / (1 − a z⁻¹) = z / (z − a),   |z| &gt; |a|
+</code></pre>
+<p><strong>Check:</strong> the pole is at <code>z = a</code>; the ROC is outside that pole. Correct for a right-sided sequence.</p>
+<h4 id="example-b-left-sided-exponential">Example B — Left-sided exponential</h4>
+<p>Now:</p>
+<pre><code>x[n] = −aⁿu[−n−1]
+</code></pre>
+<p>The same algebra gives:</p>
+<pre><code>X(z) = 1 / (1 − a z⁻¹),   |z| &lt; |a|
+</code></pre>
+<p>This is the <strong>same algebraic expression</strong> as Example A, but the ROC is different. Therefore the inverse is different:</p>
+<pre><code>−aⁿu[−n−1]  ↔  1 / (1 − a z⁻¹),   |z| &lt; |a|
+</code></pre>
+<p><strong>Very important:</strong> <code>X(z)</code> alone is not enough. You must also know the ROC.</p>
+<h4 id="example-c-sum-of-two-exponentials">Example C — Sum of two exponentials</h4>
+<pre><code>x[n] = (1/2)ⁿu[n] + (−1/3)ⁿu[n]
+</code></pre>
+<p>By linearity:</p>
+<pre><code>X(z) = 1/(1 − (1/2)z⁻¹) + 1/(1 + (1/3)z⁻¹)
+</code></pre>
+<p>Combining:</p>
+<pre><code>X(z) = [2 − (1/6)z⁻¹] / [(1 − (1/2)z⁻¹)(1 + (1/3)z⁻¹)]
+</code></pre>
+<p>The ROC is the overlap:</p>
+<pre><code>|z| &gt; 1/2
+</code></pre>
+<p>because <code>1/2</code> is the larger pole magnitude.</p>
+<h4 id="example-d-two-sided-sequence">Example D — Two-sided sequence</h4>
+<pre><code>x[n] = (−1/3)ⁿu[n] − (1/2)ⁿu[−n−1]
+</code></pre>
+<p>The first term is right-sided, so its ROC is <code>|z| &gt; 1/3</code>.<br />
+The second term is left-sided, so its ROC is <code>|z| &lt; 1/2</code>.</p>
+<p>The overall ROC is the ring:</p>
+<pre><code>1/3 &lt; |z| &lt; 1/2
+</code></pre>
+<p>The Z-transform is:</p>
+<pre><code>X(z) = 1/(1 + (1/3)z⁻¹) + 1/(1 − (1/2)z⁻¹)
+</code></pre>
+<h4 id="example-e-finite-length-signal">Example E — Finite-length signal</h4>
+<pre><code>x[n] = δ[n] + δ[n−5]
+</code></pre>
+<pre><code>X(z) = 1 + z⁻⁵
+</code></pre>
+<p>The ROC is the whole z-plane except <code>z = 0</code> (because of the <code>z⁻⁵</code> term):</p>
+<pre><code>|z| &gt; 0
+</code></pre>
+<h4 id="example-f-finite-geometric-sequence">Example F — Finite geometric sequence</h4>
+<pre><code>x[n] = aⁿ,   0 ≤ n ≤ N−1
+</code></pre>
+<pre><code>X(z) = (1 − aᴺz⁻ᴺ) / (1 − a z⁻¹)
+     = (zᴺ − aᴺ) / [z^(N−1)(z − a)]
+</code></pre>
+<p>The zeros satisfy <code>zᴺ = aᴺ</code>; there is a pole at <code>z = 0</code> and a pole at <code>z = a</code>. The pole at <code>z = a</code> is cancelled by one of the zeros, so the only remaining pole is at <code>z = 0</code>.</p>
+<p>ROC: <code>|z| &gt; 0</code>.</p>
+<hr />
+<h2 id="4-lecture-6-inverse-z-transform">4. Lecture 6 — Inverse Z-Transform</h2>
+<p>The inverse problem is: given <code>X(z)</code> and its ROC, find <code>x[n]</code>.</p>
+<p>The lecture presents three informal methods:</p>
+<ol>
+<li><strong>Inspection</strong> — recognise a standard pair.</li>
+<li><strong>Partial fraction expansion</strong> — split a complicated rational function into simple table entries.</li>
+<li><strong>Power series expansion</strong> — read the coefficients of <code>z⁻ⁿ</code> directly.</li>
+</ol>
+<h3 id="41-inspection-method">4.1 Inspection method</h3>
+<p>This works when <code>X(z)</code> is already in a known form.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>X(z) = 1 / (1 − (1/2)z⁻¹),   |z| &gt; 1/2
+</code></pre>
+<p>This is the standard right-sided pair:</p>
+<pre><code>x[n] = (1/2)ⁿu[n]
+</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code>X(z) = 1 / (1 − (1/2)z⁻¹),   |z| &lt; 1/2
+</code></pre>
+<p>Same expression, but now the ROC is inside the pole, so the sequence is left-sided:</p>
+<pre><code>x[n] = −(1/2)ⁿu[−n−1]
+</code></pre>
+<p><strong>Exam tip:</strong> always look at the ROC before choosing the right-sided or left-sided version.</p>
+<h3 id="42-partial-fraction-expansion">4.2 Partial fraction expansion</h3>
+<p>Assume <code>X(z)</code> is a ratio of polynomials in <code>z⁻¹</code>:</p>
+<pre><code>X(z) = Σ_{k=0}^{M} b_k z⁻ᵏ / Σ_{k=0}^{N} a_k z⁻ᵏ
+</code></pre>
+<p>The denominator has <code>N</code> poles at <code>d₁, d₂, …, d_N</code>.</p>
+<h4 id="case-1-m-n-and-all-poles-are-first-order">Case 1: <code>M &lt; N</code> and all poles are first order</h4>
+<pre><code>X(z) = Σ_{k=1}^{N} A_k / (1 − d_k z⁻¹)
+</code></pre>
+<p>The coefficients are found by multiplying by the factor and evaluating at the pole:</p>
+<pre><code>A_k = (1 − d_k z⁻¹) X(z) |_{z = d_k}
+</code></pre>
+<p><strong>Simple idea:</strong> each coefficient is "the residue" left after removing that pole's factor. It tells you how much of that simple exponential is present.</p>
+<p><strong>Lecture example:</strong></p>
+<pre><code>X(z) = 1 / [(1 − (1/4)z⁻¹)(1 − (1/2)z⁻¹)],   |z| &gt; 1/2
+</code></pre>
+<p>Let:</p>
+<pre><code>X(z) = A₁/(1 − (1/4)z⁻¹) + A₂/(1 − (1/2)z⁻¹)
+</code></pre>
+<p>Compute:</p>
+<pre><code>A₁ = [1 / (1 − (1/2)z⁻¹)] at z = 1/4 = −1
+A₂ = [1 / (1 − (1/4)z⁻¹)] at z = 1/2 = 2
+</code></pre>
+<p>So:</p>
+<pre><code>X(z) = −1/(1 − (1/4)z⁻¹) + 2/(1 − (1/2)z⁻¹)
+</code></pre>
+<p>Inverse:</p>
+<pre><code>x[n] = 2(1/2)ⁿu[n] − (1/4)ⁿu[n]
+</code></pre>
+<h4 id="case-2-m-n">Case 2: <code>M ≥ N</code></h4>
+<p>The numerator degree is at least the denominator degree, so first perform <strong>long division</strong>:</p>
+<pre><code>X(z) = Σ_{r=0}^{M−N} B_r z⁻ʳ + Σ_{k=1}^{N} A_k/(1 − d_k z⁻¹)
+</code></pre>
+<p>The <code>B_r</code> terms come from the long division and produce impulses <code>δ[n]</code>, <code>δ[n−1]</code>, etc.</p>
+<p><strong>Lecture example:</strong></p>
+<pre><code>X(z) = (1 + 2z⁻¹ + z⁻²) / (1 − (3/2)z⁻¹ + (1/2)z⁻²),   |z| &gt; 1
+</code></pre>
+<p>Factor:</p>
+<pre><code>X(z) = (1 + z⁻¹)² / [(1 − (1/2)z⁻¹)(1 − z⁻¹)]
+</code></pre>
+<p>Long division gives:</p>
+<pre><code>X(z) = 2 + (−1 + 5z⁻¹) / [(1 − (1/2)z⁻¹)(1 − z⁻¹)]
+</code></pre>
+<p>Partial fractions:</p>
+<pre><code>A₁ = −9,   A₂ = 8
+</code></pre>
+<p>So:</p>
+<pre><code>X(z) = 2 − 9/(1 − (1/2)z⁻¹) + 8/(1 − z⁻¹)
+</code></pre>
+<p>Inverse:</p>
+<pre><code>x[n] = 2δ[n] − 9(1/2)ⁿu[n] + 8u[n]
+</code></pre>
+<h4 id="case-3-repeated-poles">Case 3: Repeated poles</h4>
+<p>If a pole <code>d_i</code> has order <code>S</code>, the expansion needs terms like:</p>
+<pre><code>C₁/(1 − d_i z⁻¹) + C₂/(1 − d_i z⁻¹)² + … + C_S/(1 − d_i z⁻¹)^S
+</code></pre>
+<p>The coefficients are obtained from derivatives of the remaining expression. The lecture gives the general derivative formula; in practice, the idea is:</p>
+<ul>
+<li>first-order poles → one coefficient each;</li>
+<li>repeated pole of order <code>S</code> → <code>S</code> coefficients.</li>
+</ul>
+<p><strong>Exam tip:</strong> if you see <code>(1 − d z⁻¹)²</code> in the denominator, you must include <strong>two</strong> terms, not one.</p>
+<h3 id="43-power-series-expansion">4.3 Power series expansion</h3>
+<p>If:</p>
+<pre><code>X(z) = Σ_{n=−∞}^{∞} x[n]z⁻ⁿ
+       = … + x[−2]z² + x[−1]z + x[0] + x[1]z⁻¹ + x[2]z⁻² + …
+</code></pre>
+<p>then the coefficient of <code>z⁻ⁿ</code> is exactly <code>x[n]</code>.</p>
+<p><strong>Example from the lecture:</strong></p>
+<pre><code>X(z) = z²(1 − (1/2)z⁻¹)(1 + z⁻¹)(1 − z⁻¹)
+</code></pre>
+<p>Expand:</p>
+<pre><code>(1 + z⁻¹)(1 − z⁻¹) = 1 − z⁻²
+</code></pre>
+<p>Then:</p>
+<pre><code>X(z) = z²(1 − (1/2)z⁻¹)(1 − z⁻²)
+     = z² − (1/2)z − 1 + (1/2)z⁻¹
+</code></pre>
+<p>Reading coefficients:</p>
+<pre><code>x[−2] = 1
+x[−1] = −1/2
+x[0]  = −1
+x[1]  = 1/2
+all other x[n] = 0
+</code></pre>
+<p>So:</p>
+<pre><code>x[n] = δ[n+2] − (1/2)δ[n+1] − δ[n] + (1/2)δ[n−1]
+</code></pre>
+<p><strong>Simple idea:</strong> the Z-transform is a polynomial in <code>z⁻¹</code>; the sequence values are its coefficients.</p>
+<h3 id="44-which-inverse-method-should-i-use">4.4 Which inverse method should I use?</h3>
+<ul>
+<li>The expression matches a standard pair → <strong>inspection</strong>.</li>
+<li>The expression is a proper rational function → <strong>partial fractions</strong>.</li>
+<li>The numerator degree is greater than or equal to the denominator degree → <strong>long division first</strong>, then partial fractions.</li>
+<li>The expression is already a series or a product that is easy to expand → <strong>power series</strong>.</li>
+<li>There are repeated poles → <strong>partial fractions with repeated-pole terms</strong>.</li>
+</ul>
+<hr />
+<h2 id="5-lecture-6-1-z-transform-properties">5. Lecture 6-1 — Z-Transform Properties</h2>
+<p>These properties let you avoid starting from the definition every time. They are especially useful for inverse transforms.</p>
+<h3 id="51-the-eight-properties">5.1 The eight properties</h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Formula</th>
+<th>ROC / meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linearity</td>
+<td><code>a x₁[n] + b x₂[n] ↔ aX₁(z) + bX₂(z)</code></td>
+<td>ROC contains <code>R₁ ∩ R₂</code></td>
+</tr>
+<tr>
+<td>Time shifting</td>
+<td><code>x[n − n₀] ↔ z⁻ⁿ⁰X(z)</code></td>
+<td>ROC is <code>R_x</code>, except possible changes at <code>z = 0</code> or <code>z = ∞</code></td>
+</tr>
+<tr>
+<td>Multiply by exponential</td>
+<td><code>z₀ⁿx[n] ↔ X(z/z₀)</code></td>
+<td>ROC is <code>abs(z₀)R_x</code></td>
+</tr>
+<tr>
+<td>Differentiation</td>
+<td><code>n x[n] ↔ −z dX(z)/dz</code></td>
+<td>ROC is <code>R_x</code></td>
+</tr>
+<tr>
+<td>Conjugation</td>
+<td><code>x*[n] ↔ X*(z*)</code></td>
+<td>ROC is <code>R_x</code></td>
+</tr>
+<tr>
+<td>Time reversal</td>
+<td><code>x*[−n] ↔ X*(1/z*)</code></td>
+<td>ROC is <code>1/R_x</code></td>
+</tr>
+<tr>
+<td>Convolution</td>
+<td><code>x₁[n] * x₂[n] ↔ X₁(z)X₂(z)</code></td>
+<td>ROC contains <code>R₁ ∩ R₂</code></td>
+</tr>
+<tr>
+<td>Initial-value theorem</td>
+<td>if <code>x[n] = 0</code> for <code>n &lt; 0</code>, then <code>x[0] = lim_{z→∞} X(z)</code></td>
+<td>works for causal sequences</td>
+</tr>
+</tbody>
+</table>
+<p>For a <strong>real</strong> sequence, the time-reversal property simplifies to:</p>
+<pre><code>x[−n] ↔ X(1/z),   ROC = 1/R_x
+</code></pre>
+<h3 id="52-property-examples">5.2 Property examples</h3>
+<h4 id="time-shifting">Time shifting</h4>
+<p>Given:</p>
+<pre><code>X(z) = 1/(z − 1/4),   |z| &gt; 1/4
+</code></pre>
+<p>Rewrite:</p>
+<pre><code>X(z) = z⁻¹ / (1 − (1/4)z⁻¹)
+</code></pre>
+<p>The factor <code>z⁻¹</code> means a shift of one sample to the right:</p>
+<pre><code>x[n] = (1/4)^(n−1) u[n−1]
+</code></pre>
+<p>Equivalently:</p>
+<pre><code>x[n] = −4δ[n] + 4(1/4)ⁿu[n]
+</code></pre>
+<p>Both answers represent the same sequence.</p>
+<h4 id="multiplication-by-an-exponential">Multiplication by an exponential</h4>
+<p>Starting from <code>u[n] ↔ 1/(1 − z⁻¹)</code>, one can derive:</p>
+<pre><code>rⁿcos(ω₀n)u[n]  ↔  (1 − r cosω₀ z⁻¹) / (1 − 2r cosω₀ z⁻¹ + r²z⁻²),   |z| &gt; r
+</code></pre>
+<p>This is how damped sinusoids get their Z-transforms.</p>
+<h4 id="differentiation">Differentiation</h4>
+<p>From <code>aⁿu[n] ↔ 1/(1 − a z⁻¹)</code>:</p>
+<pre><code>n aⁿu[n]  ↔  a z⁻¹ / (1 − a z⁻¹)²,   |z| &gt; |a|
+</code></pre>
+<p>The extra factor <code>n</code> in time becomes a derivative in the z-domain.</p>
+<h4 id="time-reversal">Time reversal</h4>
+<pre><code>a^(−n)u[−n]  ↔  1/(1 − a z),   |z| &lt; 1/|a|
+</code></pre>
+<p>This is the time-reversed version of <code>aⁿu[n]</code>.</p>
+<h4 id="convolution">Convolution</h4>
+<p>If:</p>
+<pre><code>x₁[n] = aⁿu[n],   x₂[n] = u[n],   |a| &lt; 1
+</code></pre>
+<p>then:</p>
+<pre><code>Y(z) = 1/[(1 − a z⁻¹)(1 − z⁻¹)],   |z| &gt; 1
+</code></pre>
+<p>Partial fractions give:</p>
+<pre><code>y[n] = (1/(1 − a)) [u[n] − a^(n+1)u[n]]
+</code></pre>
+<p><strong>Simple idea:</strong> convolution in time becomes multiplication in the z-domain. This is one of the main reasons the Z-transform is so useful.</p>
+<h4 id="initial-value-theorem">Initial-value theorem</h4>
+<p>If <code>x[n]</code> is causal (zero for <code>n &lt; 0</code>), then:</p>
+<pre><code>x[0] = lim_{z→∞} X(z)
+</code></pre>
+<p>For example, if <code>X(z) = 1/(1 − a z⁻¹)</code>, then as <code>z → ∞</code>, <code>X(z) → 1</code>, so <code>x[0] = 1</code>. This matches <code>x[n] = aⁿu[n]</code>.</p>
+<hr />
+<h2 id="6-formula-sheet">6. Formula Sheet</h2>
+<h3 id="signals">Signals</h3>
+<pre><code>δ[n] = 1 at n = 0, 0 elsewhere
+u[n] = 1 for n ≥ 0, 0 for n &lt; 0
+x[n] = C αⁿ
+e^(jω₀t) = cos(ω₀t) + j sin(ω₀t)
+</code></pre>
+<h3 id="fourier-series">Fourier series</h3>
+<pre><code>CT: x(t) = Σ a_k e^(jkω₀t),   a_k = (1/T)∫_T x(t)e^(−jkω₀t)dt
+DT: x[n] = Σ a_k e^(jk(2π/N)n),   a_k = (1/N)Σ x[n]e^(−jk(2π/N)n)
+</code></pre>
+<h3 id="z-transform">Z-transform</h3>
+<pre><code>X(z) = Σ_{n=−∞}^{∞} x[n]z⁻ⁿ
+z = r e^(jω)
+X(z) at z = e^(jω) → DTFT
+</code></pre>
+<h3 id="key-pairs">Key pairs</h3>
+<pre><code>δ[n] ↔ 1
+u[n] ↔ 1/(1 − z⁻¹),        |z| &gt; 1
+aⁿu[n] ↔ 1/(1 − a z⁻¹),    |z| &gt; |a|
+−aⁿu[−n−1] ↔ 1/(1 − a z⁻¹), |z| &lt; |a|
+n aⁿu[n] ↔ a z⁻¹/(1 − a z⁻¹)², |z| &gt; |a|
+</code></pre>
+<h3 id="roc-rules">ROC rules</h3>
+<pre><code>Right-sided  → outside the outermost pole
+Left-sided   → inside the innermost pole
+Two-sided    → annulus between poles
+Finite-length → whole plane except maybe 0 or ∞
+</code></pre>
+<h3 id="stability-and-causality">Stability and causality</h3>
+<pre><code>Stable  ⇔ ROC includes the unit circle |z| = 1
+Causal  ⇔ ROC extends outward from the outermost pole
+Causal + stable ⇔ all poles inside the unit circle
+</code></pre>
+<h3 id="inverse-z-transform">Inverse Z-transform</h3>
+<pre><code>Inspection: match a known pair
+Partial fractions: X(z) = Σ A_k/(1 − d_k z⁻¹)
+A_k = (1 − d_k z⁻¹)X(z) at z = d_k
+M ≥ N: do long division first
+Power series: coefficient of z⁻ⁿ is x[n]
+</code></pre>
+<h3 id="properties">Properties</h3>
+<pre><code>Linearity:        a x₁[n] + b x₂[n] ↔ aX₁(z) + bX₂(z)
+Time shift:       x[n − n₀] ↔ z⁻ⁿ⁰X(z)
+Exponential:      z₀ⁿx[n] ↔ X(z/z₀)
+Differentiation:  n x[n] ↔ −z dX/dz
+Conjugation:      x*[n] ↔ X*(z*)
+Time reversal:    x*[−n] ↔ X*(1/z*)
+Convolution:      x₁[n] * x₂[n] ↔ X₁(z)X₂(z)
+Initial value:    x[0] = lim_{z→∞} X(z)   (causal x[n])
+</code></pre>
+<hr />
+<h2 id="7-common-mistakes-to-avoid">7. Common Mistakes to Avoid</h2>
+<ol>
+<li><strong>Forgetting the ROC.</strong> The same <code>X(z)</code> can correspond to a right-sided or a left-sided sequence. The ROC decides which one.</li>
+<li><strong>Including a pole in the ROC.</strong> The ROC never contains a pole, because <code>X(z)</code> is infinite there.</li>
+<li><strong>Saying "ROC is all z" for a finite-length signal.</strong> It is the whole plane <strong>except</strong> <code>z = 0</code> and/or <code>z = ∞</code> in many cases.</li>
+<li><strong>Using partial fractions before long division.</strong> If <code>M ≥ N</code>, divide first; otherwise the expansion is not proper.</li>
+<li><strong>Missing repeated-pole terms.</strong> A pole of order 2 needs two terms.</li>
+<li><strong>Mixing up stability and causality.</strong> Stable means the ROC includes the unit circle; causal means the ROC is outside the outermost pole. You need both conditions for "causal and stable".</li>
+<li><strong>Wrong shift direction.</strong> <code>x[n − n₀]</code> moves right for positive <code>n₀</code>.</li>
+<li><strong>Forgetting the <code>z⁻¹</code> factor in time-shift inverse problems.</strong> It corresponds to a shift, not a constant.</li>
+<li><strong>Treating the Z-transform as only a frequency transform.</strong> It is a complex-plane transform; the unit circle is only one special slice.</li>
+<li><strong>Dropping the <code>u[n]</code> or <code>u[−n−1]</code> in the final answer.</strong> The ROC tells you which one belongs there.</li>
+</ol>
+<hr />
+<h2 id="8-one-minute-recap">8. One-Minute Recap</h2>
+<ul>
+<li><strong>DSP</strong> processes discrete signals <code>x[n]</code>.</li>
+<li><strong>Basic signals:</strong> impulse, step, exponential, sinusoid.</li>
+<li><strong>Fourier series</strong> decomposes periodic signals into sinusoids.</li>
+<li><strong>Z-transform:</strong> <code>X(z) = Σ x[n]z⁻ⁿ</code>; it generalizes the DTFT.</li>
+<li><strong>ROC</strong> is the region where the transform converges; it never contains poles.</li>
+<li><strong>Poles and zeros</strong> describe the denominator and numerator roots.</li>
+<li><strong>Stable</strong> ⇔ ROC includes the unit circle.</li>
+<li><strong>Causal</strong> ⇔ ROC is outside the outermost pole.</li>
+<li><strong>Causal + stable</strong> ⇔ all poles inside the unit circle.</li>
+<li><strong>Inverse Z</strong> methods: inspection, partial fractions, power series.</li>
+<li><strong>Properties</strong> (linearity, shift, exponential multiplication, differentiation, reversal, convolution) make calculations much easier.</li>
+<li><strong>Golden rule:</strong> always pair <code>X(z)</code> with its ROC.</li>
+</ul>
+<hr />
+<p><em>End of report.</em></p>
+</body>
+</html>
